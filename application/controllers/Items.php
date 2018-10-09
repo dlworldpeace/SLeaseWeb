@@ -4,6 +4,7 @@
             $data['title'] = 'Selected Item: ';
 
             $data['items'] = $this->item_model->get_items();
+            print_r($data['items']);
 
             $this->load->view('templates/header');
             $this->load->view('items/index', $data);
