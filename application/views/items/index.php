@@ -11,11 +11,11 @@
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item"><?php echo $item['owner']; ?></li>
-                    <li class="list-group-item"><?php echo $item['fromdate']; ?><?php echo $item['todate']; ?></li>
+                    <li class="list-group-item"><?php echo $item['fromdate']; ?> to <?php echo $item['todate']; ?></li>
                     <li class="list-group-item"><?php echo $item['pickup_location']; ?></li>
                 </ul>
                 <div class="card-footer text-muted">
-                    2 days to ago!
+                    2 more days to go!
                     <a class="btn btn-primary btn-lg" href="#" role="button">To Bid</a>
                 </div>
             </div>
