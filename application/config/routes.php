@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+$route['auths'] = 'auths/index';
 $route['items/create'] = 'items/create';
 $route['items/search'] = 'items/search';
 $route['items/(:any)'] = 'items/detail/$1';
