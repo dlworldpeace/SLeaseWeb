@@ -1,7 +1,7 @@
 <?php
     class Items extends CI_Controller {
         public function index() {
-            $data['title'] = 'Selected Item: ';
+            $data['title'] = 'Items on lease: ';
             
 
             $data['items'] = $this->item_model->get_items();
