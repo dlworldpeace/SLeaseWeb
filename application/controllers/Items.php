@@ -79,7 +79,8 @@
         }
 
         public function delete($item_id){
-            $this->item_model->delete_item($item_id);
-            redirect('items');
+            if($this->item_model->delete_item($item_id)) {
+                redirect('items');
+            }
         }
     }
