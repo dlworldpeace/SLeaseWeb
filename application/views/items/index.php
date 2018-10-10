@@ -1,5 +1,8 @@
 <h2><?= $title ?></h2>
 
+<a class="btn btn-primary btn-lg" href="<?php echo site_url('/items/create'); ?>" role="button">Lease your item</a>
+
+
 <div class="row">
     <?php foreach($items as $item) : ?>
         <div class="col-lg-4">
