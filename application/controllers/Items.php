@@ -83,6 +83,7 @@
             $this->load->view('templates/footer');
         }
 
+
         public function delete($item_id){
             if($this->item_model->delete_item($item_id)) {
                 redirect('items');

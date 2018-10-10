@@ -2,6 +2,17 @@
 
 <a class="btn btn-primary btn-lg" href="<?php echo site_url('/items/create'); ?>" role="button">Lease your item</a>
 
+<div class="form-group">
+      <label for="exampleSelect1">Sort By:</label>
+      <select class="form-control" name="SorBy">
+        <option value='Fromdate'>From Date</option>
+        <option value='MinBid'>Mininum Bids</option>
+        <option value='NameA'>Name Asc</option>
+        <option value='NameD'>Name Des</option>
+      </select>
+    </div>
+
+
 
 <div class="row">
     <?php foreach($items as $item) : ?>
