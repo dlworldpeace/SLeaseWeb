@@ -13,5 +13,6 @@
             $query = $this->db->query("SELECT * FROM Items WHERE Item_id = '".$item_id."'");
             return $query->result_array();
         }
+        
 
     }
