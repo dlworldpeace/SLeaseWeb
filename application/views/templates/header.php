@@ -13,22 +13,22 @@
 
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="<?php echo base_url(); ?>">Home<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?php echo base_url(); ?>items">Browse</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?php echo base_url(); ?>about">About</a>
-                </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="<?php echo base_url(); ?>">Home<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo base_url(); ?>items">Browse</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo base_url(); ?>about">About</a>
+                    </li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0" action="<?php echo site_url('/items/search/')?>"  method = "post"> 
-                <input class="form-control mr-sm-2" name="searchBy" id="searchBy" type="text" placeholder="Search item by name">
-                <button class="btn btn-secondary my-2 my-sm-0"  type="submit">Search</button>
+                <form class="form-inline my-2 my-lg-0" action="<?php echo site_url('/items/search')?>"  method = "post"> 
+                    <input class="form-control mr-sm-2" name="searchBy" id="searchBy" type="text" placeholder="Browse by name">
+                    <button class="btn btn-secondary my-2 my-sm-0"  type="submit">Search</button>
                 </form>
             </div>
         </nav>
