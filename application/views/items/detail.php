@@ -11,3 +11,8 @@
     <li><?php echo $item['pickup_location']; ?></li>
     <li><?php echo $item['return_location']; ?></li>
 </ul>
+
+<hr>
+<?php echo form_open('/items/delete/'.$item['item_id']); ?>
+    <input type="submit" value="delete" class="btn btn-danger">
+</form>

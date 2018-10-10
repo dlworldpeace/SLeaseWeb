@@ -10,7 +10,7 @@
                 return $query->result_array();
             }
 
-            $query = $this->db->query("SELECT * FROM Items WHERE Item_id = '".$item_id."'");
+            $query = $this->db->query("SELECT * FROM Items WHERE Item_id = '".$item_id."';");
             return $query->result_array();
         }
         
@@ -47,5 +47,10 @@
                 return true;
             }
             return false;
+        }
+
+        public function delete_item($item_id) {
+            $this->db->query("DELETE FROM Items WHERE Item_id = '".$item_id."';");
+            return true;
         }
     }

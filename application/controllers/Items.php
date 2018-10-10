@@ -73,4 +73,14 @@
                 }
             }
         }
+
+        public function search(){
+
+        }
+
+        public function delete($item_id){
+            if($this->item_model->delete_item($item_id)) {
+                redirect('items');
+            }
+        }
     }
