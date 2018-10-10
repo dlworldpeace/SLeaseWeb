@@ -4,11 +4,8 @@
     <?php foreach($items as $item) : ?>
         <div class="col-lg-4">
             <div class="card mb-3">
-                <h3 class="card-header"><?php echo $item['item_name']; ?></h3>
-                <img style="height: 200px; width: 100%; display: block;" src="data:image/jpeg;base64, <?php echo (string)$item['image']; ?>" alt="Image missing">
-                <div class="card-body">
-                    <p class="card-text"><?php echo $item['description']; ?></p>
-                </div>
+                <h3 class="card-header"><?php echo mb_strimwidth($item['item_name'],0, 18,"..."); ?></h3>
+                <img style="height: 200px; width: 100%; display: block;" src="<?php echo (string)$item['image']; ?>" alt="Image missing">
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item"><?php echo $item['owner']; ?></li>
                     <li class="list-group-item"><?php echo $item['fromdate']; ?> to <?php echo $item['todate']; ?></li>
