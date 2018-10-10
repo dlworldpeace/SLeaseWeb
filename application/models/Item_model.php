@@ -13,6 +13,11 @@
             $query = $this->db->query("SELECT * FROM Items WHERE Item_id = '".$item_id."';");
             return $query->result_array();
         }
+
+        public function search_items($keyword) {
+            $query = $this->db->query("SELECT * FROM Items WHERE Item_name like '%".$keyword."%';");
+            return $query->result_array();
+        }
         
         public function create_item() {
             // $image = file_get_contents($this->input->file['image']['tmp_name']);

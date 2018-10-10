@@ -8,7 +8,6 @@
 
         public function index() {
             $data['title'] = 'Items on lease: ';
-            
 
             $data['items'] = $this->item_model->get_items();
             
@@ -74,8 +73,14 @@
             }
         }
 
-        public function search(){
+        public function search() {
+            $keyword = $this->input->post('searchBy');
+            $data['items'] = $this->item_model->search_items($keyword);
+            $data['title'] = 'Items with the keyword: '.$keyword;
 
+            $this->load->view('templates/header');
+            $this->load->view('items/index', $data);
+            $this->load->view('templates/footer');
         }
 
         public function delete($item_id){
