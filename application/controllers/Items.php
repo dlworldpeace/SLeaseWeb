@@ -167,11 +167,16 @@
         public function bid_for($item_id) {
             $current_user = $this->check_login();
 
-            if($this->bid_model->create_bid($item_id, $current_user)) {
-                redirect('items/'.$item_id);
-            } else {
-                print_r('Fail to place bid');
+            if(empty($this->get_current_bid($item_id, $current_user))) { // insert if there is no previous bid by this user on this item
+                if($this->bid_model->create_bid($item_id, $current_user)) {
+                    redirect('items/'.$item_id);
+                }
+            } else { // update the rate if there is existing bid by this user on this item
+                if($this->bid_model->update_bid($item_id, $current_user)) {
+                    redirect('items/'.$item_id);
+                }
             }
+            print_r('Fail to place bid');
         }
         /* Bids functions end. */
     }

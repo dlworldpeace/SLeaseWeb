@@ -47,10 +47,7 @@
                 'category' => (int)$this->input->post('category')
             );
             $sql = "INSERT INTO Items VALUES(?,DEFAULT,?,?,?,?,?,?,?,?,?,?)";
-            if($this->db->query($sql, $data)){
-                return true;
-            }
-            return false;
+            return $this->db->query($sql, $data);
         }
 
         public function update_item($item_id) {
@@ -83,14 +80,10 @@
                 Pickup_region = ?, 
                 Categories = ?
                 WHERE Item_id= ".$item_id.";";
-            if($this->db->query($sql, $data)){
-                return true;
-            }
-            return false;
+            return $this->db->query($sql, $data);
         }
 
         public function delete_item($item_id) {
-            $this->db->query("DELETE FROM Items WHERE Item_id = '".$item_id."';");
-            return true;
+            return $this->db->query("DELETE FROM Items WHERE Item_id = '".$item_id."';");
         }
     }

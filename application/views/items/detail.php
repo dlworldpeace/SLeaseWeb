@@ -1,7 +1,7 @@
 <h2><?php echo $item['item_name']; ?></h2>
 
 
-<img style="height: 200px; width: 100%; display: block;" src="<?php echo (string)$item['image']; ?>" alt="Image missing">
+<img style="height: 200px; display: block;" src="<?php echo (string)$item['image']; ?>" alt="Image missing">
 
 <p><?php echo $item['description']; ?></p>
 

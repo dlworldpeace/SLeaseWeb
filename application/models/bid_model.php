@@ -30,10 +30,7 @@
                 'rate' => $this->input->post('rate')
             );
             $sql = "INSERT INTO Bids VALUES(?,?,?);";
-            if($this->db->query($sql, $data)){
-                return true;
-            }
-            return false;
+            return $this->db->query($sql, $data);
         }
 
         //if the user have bid the item
@@ -43,12 +40,12 @@
         }
 
         public function delete_bid($item_id, $email) {
-            $this->db->query("DELETE FROM Bids WHERE Item_id = ".$item_id." AND Email = '".$email."';");
-            return true;
+            return $this->db->query("DELETE FROM Bids WHERE Item_id = ".$item_id." AND Email = '".$email."';");
+
         }
 
-        public function update_bid($rate, $item_id, $email) {
-            $this->db->query("UPDATE Bids SET Rate='".$rate."' WHERE Item_id = ".$item_id." AND Email = '".$email."';");
-            return true;
+        public function update_bid($item_id, $email) {
+            $rate = $this->input->post('rate');
+            return $this->db->query("UPDATE Bids SET Rate='".$rate."' WHERE Item_id = ".$item_id." AND Email = '".$email."';");
         }
    }
