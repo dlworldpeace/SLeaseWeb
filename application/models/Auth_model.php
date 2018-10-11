@@ -38,9 +38,7 @@
 
         public function validate() {
             $email = $this->input->post('email');
-            $password = md5($this->input->post('password'));
-            print_r($this->input->post('email'));
-            print_r($this->input->post('password'));
+            $password = $this->input->post('password');
             $result = $this->db->query("SELECT * FROM Users WHERE Email = '".$email."' AND Password = '".$password."';");
             print_r($result->num_rows());
             return $result->num_rows() === 1;

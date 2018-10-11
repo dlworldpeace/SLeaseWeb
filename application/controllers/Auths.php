@@ -43,10 +43,6 @@
         }
 
         public function check_if_email_exists($proposed_email) { // custom callback function
-            if($this->auth_model->check_if_email_exists($proposed_email)) {
-                return TRUE;
-            } else {
-                return FALSE;
-            }
+            return $this->auth_model->check_if_email_exists($proposed_email);
         }
     }
