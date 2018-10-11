@@ -73,16 +73,14 @@
                 'image' => '', //$imageUri,
                 'pickup_location' => $this->input->post('pickup_location'),                
                 'pickup_region' => $this->input->post('pickup_region'),
-                'return_location' => $this->input->post('return_location'),
                 'category' => (int)$this->input->post('category')
             );
             $sql = "UPDATE Items SET 
-                Item_name = '?', 
-                Description = '?', 
-                Image = '?', 
-                Pickup_location = '?', 
-                Pickup_region ='?', 
-                Return_location = '?', 
+                Item_name = ?, 
+                Description = ?, 
+                Image = ?, 
+                Pickup_location = ?, 
+                Pickup_region = ?, 
                 Categories = ?
                 WHERE Item_id= ".$item_id.";";
             if($this->db->query($sql, $data)){

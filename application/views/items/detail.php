@@ -19,3 +19,7 @@
 <?php echo form_open('/items/delete/'.$item['item_id']); ?>
     <input type="submit" value="delete" class="btn btn-danger">
 </form>
+
+<?php echo form_open('/items/edit/'.$item['item_id']); ?>
+    <input type="submit" value="edit" class="btn btn-default">
+</form>
