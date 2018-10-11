@@ -40,7 +40,7 @@
         }
 
         public function update_bid($Rate,$item_id, $Email) {
-            $this->db->query("UPDATE Bids SET Rate='".$Rate."'  Item_id = ".$item_id." AND Email = '".$Email."';");
+            $this->db->query("UPDATE Bids SET Rate='".$Rate."' WHERE Item_id = ".$item_id." AND Email = '".$Email."';");
             return true;
         }
    }
