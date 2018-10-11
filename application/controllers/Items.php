@@ -17,7 +17,10 @@
                 show_404();
             }
             $data['item'] = reset($data['items']);
-            $data['category'] = $this->category_model ->get_category($data['item']['categories']);
+            $category = $this->category_model->get_category($data['item']['categories']);
+            $data['category'] = reset($category)['name'];
+
+            print_r($data['category']);
 
             $this->load->view('templates/header');
             $this->load->view('items/detail', $data);
@@ -40,6 +43,8 @@
             $this->form_validation->set_rules('fromdate', 'Fromdate', 'required');
             $this->form_validation->set_rules('todate', 'Todate', 'required');
             $this->form_validation->set_rules('category', 'Category', 'required');
+
+            $data['categories'] = $this -> category_model -> get_categories();
 
             if($this->form_validation->run() === FALSE) {
                 print_r(1);
