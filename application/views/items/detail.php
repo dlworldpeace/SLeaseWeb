@@ -10,6 +10,9 @@
     <li><?php echo $item['fromdate']; ?> to <?php echo $item['todate']; ?></li>
     <li><?php echo $item['pickup_location']; ?></li>
     <li><?php echo $item['return_location']; ?></li>
+    <li><?php echo $category; ?></li>
+
+   	
 </ul>
 
 <hr>
