@@ -50,11 +50,4 @@
             $this->session->sess_destroy();
             $this->index();
         }
-
-        public function check_login() {
-            $user = $this->session->userdata('email');
-            if(!isset($user)) { // redirect if there is no log in data
-                $this->logout();
-            }
-        }
     }
