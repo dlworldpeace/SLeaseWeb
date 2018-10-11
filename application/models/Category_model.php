@@ -4,13 +4,20 @@
             $this->load->database();
         }
 
-        public function get_category($Cat_id = FALSE) {
-            if($Cat_id === FALSE) {
-                $query = $this->db->query('SELECT * FROM Categories;');
-                return $query->result_array();
-            }
+        //retrieve array of all categories
+        public function get_categories(){
+            $query = $this ->db-> query("SELECT * FROM Categories;");
+            return $query -> result_array();
+        }
 
-            $query = $this->db->query("SELECT * FROM Categories WHERE Cat_id = '".$Cat_id."';");
+        public function get_categoriesname(){
+            $query = $this ->db-> query("SELECT Name FROM Categories;");
+            return $query -> result_array();
+        }
+
+
+        public function get_category($Cat_id) {
+            $query = $this->db->query("SELECT Name FROM Categories WHERE Cat_id = '".$Cat_id."';");
             return $query->result_array();
         }
  

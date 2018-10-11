@@ -41,6 +41,8 @@
             $this->form_validation->set_rules('todate', 'Todate', 'required');
             $this->form_validation->set_rules('category', 'Category', 'required');
 
+            $data['categories'] = $this -> category_model -> get_categories();
+
             if($this->form_validation->run() === FALSE) {
                 print_r(1);
                 $this->load->view('templates/header');
