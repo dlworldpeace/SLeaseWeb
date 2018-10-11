@@ -10,16 +10,16 @@
     <li><?php echo $item['fromdate']; ?> to <?php echo $item['todate']; ?></li>
     <li><?php echo $item['pickup_location']; ?></li>
     <li><?php echo $item['return_location']; ?></li>
-    <li><?php echo $category; ?></li>
-
-   	
+    <li><?php echo $category; ?></li>	
 </ul>
-
 <hr>
-<?php echo form_open('/items/delete/'.$item['item_id']); ?>
-    <input type="submit" value="delete" class="btn btn-danger">
-</form>
+<div class="row">
+    <?php echo form_open('/items/edit/'.$item['item_id']); ?>
+        <input type="submit" value="edit" class="btn btn-default">
+    </form>
+    <?php echo form_open('/items/delete/'.$item['item_id']); ?>
+        <input type="submit" value="delete" class="btn btn-danger">
+    </form>
+</div>
+<hr>
 
-<?php echo form_open('/items/edit/'.$item['item_id']); ?>
-    <input type="submit" value="edit" class="btn btn-default">
-</form>

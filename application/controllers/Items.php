@@ -138,12 +138,10 @@
         public function update($item_id){
             $current_user = $this->check_login();
 
-            print_r('starting to validate');
             $this->form_validation->set_rules('item_name', 'Item_name', 'required');
             $this->form_validation->set_rules('description', 'Description', 'required');
             $this->form_validation->set_rules('pickup_location', 'Pickup_location', 'required');
             $this->form_validation->set_rules('category', 'Category', 'required');
-
 
             if($this->form_validation->run() === FALSE) {
                 print_r("fail to pass validation");
@@ -167,16 +165,27 @@
         public function bid_for($item_id) {
             $current_user = $this->check_login();
 
-            if(empty($this->get_current_bid($item_id, $current_user))) { // insert if there is no previous bid by this user on this item
-                if($this->bid_model->create_bid($item_id, $current_user)) {
-                    redirect('items/'.$item_id);
+            $this->load->library('form_validation');
+            $this->form_validation->set_rules('rate', 'Rate', 'trim|required|callback_check_if_higher_than_current_highest');
+
+            if($this->form_validation->run() === FALSE) { //didn't pass validation
+                $this->detail($item_id);
+            } else {
+                if(empty($this->get_current_bid($item_id, $current_user))) { // insert if there is no previous bid by this user on this item
+                    if($this->bid_model->create_bid($item_id, $current_user)) {
+                        redirect('items/'.$item_id);
+                    }
+                } else { // update the rate if there is existing bid by this user on this item
+                    if($this->bid_model->update_bid($item_id, $current_user)) {
+                        redirect('items/'.$item_id);
+                    }
                 }
-            } else { // update the rate if there is existing bid by this user on this item
-                if($this->bid_model->update_bid($item_id, $current_user)) {
-                    redirect('items/'.$item_id);
-                }
+                print_r('Fail to place bid');
             }
-            print_r('Fail to place bid');
+        }
+
+        public function check_if_higher_than_current_highest($proposed_rate) { // custom callback function
+            return $this->bid_model->check_if_higher_than_current_highest($proposed_rate);
         }
         /* Bids functions end. */
     }

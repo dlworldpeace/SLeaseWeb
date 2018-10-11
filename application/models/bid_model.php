@@ -48,4 +48,15 @@
             $rate = $this->input->post('rate');
             return $this->db->query("UPDATE Bids SET Rate='".$rate."' WHERE Item_id = ".$item_id." AND Email = '".$email."';");
         }
+
+        public function check_if_higher_than_current_highest($rate) {
+            $item_id = $this->input->post('item_id');
+            $result = $this->db->query("SELECT MAX(Rate) FROM Bids WHERE Item_id = ".$item_id.";")->result_array();
+            if(empty($result)) {
+                return TRUE;
+            } else {
+                $value = reset($result)['max'];
+                return $rate > $value;
+            }
+        }
    }
