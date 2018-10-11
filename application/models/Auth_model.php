@@ -40,7 +40,6 @@
             $email = $this->input->post('email');
             $password = $this->input->post('password');
             $result = $this->db->query("SELECT * FROM Users WHERE Email = '".$email."' AND Password = '".$password."';");
-            print_r($result->num_rows());
             return $result->num_rows() === 1;
         }
 

@@ -27,7 +27,7 @@
                 </ul>
                 <div class="card-footer text-muted">
                     2 more days to go!
-                    <a class="btn btn-primary btn-lg" href="<?php echo site_url('/items/'.$item['item_id']); ?>" role="button">To Bid</a>
+                    <a class="btn btn-primary btn-lg" href="<?php echo site_url('/items/'.$item['item_id']); ?>" role="button">Find More</a>
                 </div>
             </div>
         </div>
