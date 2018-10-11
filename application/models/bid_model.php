@@ -27,7 +27,6 @@
             
         }
 
-
         public function delete_bid($item_id, $Email) {
             $this->db->query("DELETE FROM Bids WHERE Item_id = '".$item_id."' AND Email = '".$Email."';");
             return true;
