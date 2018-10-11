@@ -1,6 +1,16 @@
 <?php
     class Items extends CI_Controller {
+
+        public function check_login() {
+            $user = $this->session->userdata('email');
+            if(!isset($user)) { // redirect if there is no log in data
+                redirect('auths/logout');
+            }
+        }
+
         public function index() {
+            $this->check_login();
+
             $data['title'] = 'Items on lease: ';
 
             $data['items'] = $this->item_model->get_items();
@@ -11,6 +21,8 @@
         }
 
         public function detail($item_id) {
+            $this->check_login();
+
             $data['items'] = $this->item_model->get_items($item_id);
 
             if(empty($data['items'])) {
@@ -28,6 +40,8 @@
         }
 
         public function create($msg = FALSE) {
+            $this->check_login();
+
             $data['title'] = 'Lease a new item';
             if($msg !== FALSE) {	
                 $data['error'] = $msg['error'];	
@@ -72,6 +86,8 @@
         }	
 
         public function search() {	
+            $this->check_login();
+
             $keyword = $this->input->post('searchBy');	
             $data['items'] = $this->item_model->search_items($keyword);	
             $data['title'] = 'Items with the keyword: '.$keyword;	
@@ -80,7 +96,9 @@
             $this->load->view('templates/footer');	
         }	
 
-        public function delete($item_id){	
+        public function delete($item_id){
+            $this->check_login();
+            	
             if($this->item_model->delete_item($item_id)) {
                 redirect('items');
             }
