@@ -13,7 +13,7 @@
 
         public function detail($item_id) {
             $data['items'] = $this->item_model->get_items($item_id);
-            $data['tems'] = $this->Category_model ->get_category($Cat_id);
+            $data['category'] = $this->category_model ->get_category($Cat_id);
 
             if(empty($data['items'])) {
                 show_404();

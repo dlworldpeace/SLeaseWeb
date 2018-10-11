@@ -1,5 +1,5 @@
 <?php
-    class bid_model extends CI_Model {
+    class Bid_model extends CI_Model {
         public function __construct() {
             $this->load->database();
         }
