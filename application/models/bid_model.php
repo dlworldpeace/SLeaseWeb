@@ -11,36 +11,44 @@
         }
 
         //my bid item that is successful , need to finalize with the sql
-        public function get_suBids($Email) {
+        public function get_suBids($email) {
                 $query = $this->db->query("");//need to be modify
                 return $query->result_array();
         }
 
         //my bid item that is unsuccessful , need to finalize with the sql
-        public function get_unsuBbids($Email) {
+        public function get_unsuBbids($email) {
             $query = $this->db->query("");//need to be modify
             return $query->result_array();
         }
 
         //create bid, follow item_create
-        public function create_bids() {
-            
+        public function create_bid($item_id,$email) {
+            $data= array(
+                'item_id' => $item_id,
+                'email' => $email,
+                'rate' => $this->input->post('rate')
+            );
+            $sql = "INSERT INTO Bids VALUES(?,?,?);";
+            if($this->db->query($sql, $data)){
+                return true;
+            }
+            return false;
         }
 
         //if the user have bid the item
-        public function get_current_bid($item_id,$Email) {
-            $result = $this->db->query("SELECT * FROM bids WHERE Item_id = ".$item_id." AND Email = '".$Email."';");
-            print_r($result->num_rows());
-            return $result->num_rows() === 1;
+        public function get_current_bid($item_id,$email) {
+            $result = $this->db->query("SELECT * FROM bids WHERE Item_id = ".$item_id." AND Email = '".$email."';");
+            return $result->result_array();
         }
 
-        public function delete_bid($item_id, $Email) {
-            $this->db->query("DELETE FROM Bids WHERE Item_id = ".$item_id." AND Email = '".$Email."';");
+        public function delete_bid($item_id, $email) {
+            $this->db->query("DELETE FROM Bids WHERE Item_id = ".$item_id." AND Email = '".$email."';");
             return true;
         }
 
-        public function update_bid($Rate,$item_id, $Email) {
-            $this->db->query("UPDATE Bids SET Rate='".$Rate."' WHERE Item_id = ".$item_id." AND Email = '".$Email."';");
+        public function update_bid($rate, $item_id, $email) {
+            $this->db->query("UPDATE Bids SET Rate='".$rate."' WHERE Item_id = ".$item_id." AND Email = '".$email."';");
             return true;
         }
    }

@@ -38,6 +38,7 @@
 
             // pass the current bid data by current user for this item to view
             $bid_data['bid'] = $this->get_current_bid($item_id, $current_user);
+            $bid_data['item_id'] = $data['item']['item_id'];
 
             $this->load->view('templates/header');
             $this->load->view('items/detail', $data);
@@ -154,7 +155,6 @@
                 }
             }   
         }
-
         /* Items functions end. */
 
 
@@ -164,17 +164,14 @@
             return reset($result);
         }
 
-        public function create_bid($item_id) {
+        public function bid_for($item_id) {
             $current_user = $this->check_login();
 
-            $rate = $this->input->post('rate');	
-            if($this->item_model->create_bid($item_id, $current_user)) {
-                print_r('placed bid successfully!');
-                redirect('items/detail/'.$item_id);
+            if($this->bid_model->create_bid($item_id, $current_user)) {
+                redirect('items/'.$item_id);
             } else {
                 print_r('Fail to place bid');
             }
         }
-     
         /* Bids functions end. */
     }
