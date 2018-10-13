@@ -35,17 +35,17 @@
             $data['item'] = reset($data['items']);
             $category = $this->category_model->get_category($data['item']['categories']);
             $data['category'] = reset($category)['name'];
+            $bid_data['item_id'] = $data['item']['item_id']; 
 
-            // pass the current bid data by current user for this item to view
-            $bid_data['bid'] = $this->get_current_bid($item_id, $current_user);
-            $bid_data['item_id'] = $data['item']['item_id'];
 
             $this->load->view('templates/header');
             $this->load->view('items/detail', $data);
             if($current_user !== $data['item']['owner']) { // load bidding board if this item belongs to someone else.
-                $this->load->view('bids/view', $bid_data);
+                $bid_data['bid'] = $this->get_current_bid($item_id, $current_user); // pass the current bid data by current user for this item to view
+                $this->load->view('items/bid', $bid_data);
             } else { // load current bidding stats if this item belongs to current user.
-                // TODO: load bidding stats view
+                $bid_data['bids'] = $this->get_bids($item_id);
+                $this->load->view('items/stat', $bid_data);
             }
             $this->load->view('templates/footer');
         }
@@ -157,6 +157,10 @@
 
 
         /* Bids functions. */
+        public function get_bids($item_id) {
+            return $this->bid_model->get_bids($item_id);
+        }
+
         public function get_current_bid($item_id, $current_user) {
             $result = $this->bid_model->get_current_bid($item_id, $current_user);
             return reset($result);

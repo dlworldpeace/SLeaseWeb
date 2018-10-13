@@ -6,14 +6,15 @@
 
         //for owner of the item, to see who have bid for the item
         public function get_bids($item_id) {
-                $query = $this->db->query("SELECT Rate, Email FROM Bids  WHERE item_id = ".$item_id.";");
-                return $query->result_array();
+            $query = $this->db->query("SELECT Rate, Email FROM Bids  WHERE Item_id = ".$item_id." 
+                                        ORDER BY Rate DESC;");
+            return $query->result_array();
         }
 
         //my bid item that is successful , need to finalize with the sql
         public function get_suBids($email) {
-                $query = $this->db->query("");//need to be modify
-                return $query->result_array();
+            $query = $this->db->query("");//need to be modify
+            return $query->result_array();
         }
 
         //my bid item that is unsuccessful , need to finalize with the sql
@@ -37,11 +38,6 @@
         public function get_current_bid($item_id,$email) {
             $result = $this->db->query("SELECT * FROM bids WHERE Item_id = ".$item_id." AND Email = '".$email."';");
             return $result->result_array();
-        }
-
-        public function delete_bid($item_id, $email) {
-            return $this->db->query("DELETE FROM Bids WHERE Item_id = ".$item_id." AND Email = '".$email."';");
-
         }
 
         public function update_bid($item_id, $email) {

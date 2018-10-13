@@ -1,7 +1,6 @@
 <h2><?php echo $item['item_name']; ?></h2>
 
-
-<img style="height: 200px; display: block;" src="<?php echo (string)$item['image']; ?>" alt="Image missing">
+<img style="display: block;" src="<?php echo (string)$item['image']; ?>" alt="Image missing">
 
 <p><?php echo $item['description']; ?></p>
 
@@ -13,13 +12,5 @@
     <li><?php echo $category; ?></li>	
 </ul>
 <hr>
-<div class="row">
-    <?php echo form_open('/items/edit/'.$item['item_id']); ?>
-        <input type="submit" value="edit" class="btn btn-default">
-    </form>
-    <?php echo form_open('/items/delete/'.$item['item_id']); ?>
-        <input type="submit" value="delete" class="btn btn-danger">
-    </form>
-</div>
-<hr>
+
 
