@@ -32,7 +32,7 @@
                     <input class="form-control mr-sm-2" name="searchBy" id="searchBy" type="text" placeholder="Browse by name">
                     <button class="btn btn-secondary my-2 my-sm-0"  type="submit">Search</button>
                 </form>
-                <a class="btn btn-warning"  href="<?php echo site_url('/auths/logout'); ?>" role="button">Log out</a>
+                <a class="btn btn-warning" style="margin-left:10px" href="<?php echo site_url('/auths/logout'); ?>" role="button">Log out</a>
             </div>
         </nav>
 
