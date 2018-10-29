@@ -2,26 +2,18 @@
 
 <?php echo validation_errors(); ?>
 
-<?php echo form_open_multipart('items/create'); ?>
+<?php echo form_open_multipart('items/update/'.$item['item_id']); ?>
   <fieldset>
     <div class="form-group row">
-      <label for="staticEmail" class="col-sm-2 col-form-label">User</label>
-      <div class="col-sm-10">
-        <input type="text" readonly="" class="form-control-plaintext" name="owner" value="justminyu@gmail.com">
-      </div>
     </div>
     <div class="form-group">
       <label for="exampleInputEmail1">Item name</label>
-      <input class="form-control" name="item_name" placeholder="Enter an item name">
+      <input class="form-control" name="item_name" placeholder="Enter an item name" value = "<?php echo $item['item_name']; ?>">
       <small id="emailHelp" class="form-text text-muted">Unique name that makes your item stand out.</small>
     </div>
     <div class="form-group">
       <label for="exampleTextarea">Item Description</label>
-      <textarea class="form-control" name="description" rows="3"></textarea>
-    </div>
-    <div class="form-group">
-      <label for="exampleInputPassword1">Starting bid</label>
-      <input type="number" class="form-control" name="minbid" placeholder="S$">
+      <textarea class="form-control" name="description" rows="3"><?php echo $item['description'];?></textarea>
     </div>
     <div class="form-group">
       <label for="exampleSelect1">Category</label>
@@ -54,16 +46,9 @@
     </div>
     <div class="form-group">
       <label for="exampleInputPassword1">Pick up Location</label>
-      <input class="form-control" name="pickup_location" placeholder="Enter an address">
+      <input class="form-control" name="pickup_location" placeholder="Enter an address" value = "<?php echo $item['pickup_location']; ?>">
     </div>
-    <div class="form-group">
-      <label for="exampleInputPassword1">Return Location</label>
-      <input class="form-control" name="return_location" placeholder="Enter an address">
-    </div>
-    <div class="form-group">
-      From<input type="date" data-date-format="mm-dd-yyyy" class="form-control" name="fromdate">
-      To<input type="date" data-date-format="mm-dd-yyyy" class="form-control" name="todate">
-    </div>
-    <button type="submit" class="btn btn-primary" name="upload" value="upload">Submit</button>
+    
+    <button type="submit" class="btn btn-default" name="update" value="update">update</button>
   </fieldset>
 </form>

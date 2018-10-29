@@ -13,7 +13,7 @@
             if($this->auth_model->validate()) { // if the user's credential is validated.
                 $data = array(
                     'email' => $this->input->post('email'),
-                    'is_logged_in' => true
+                    //'is_logged_in' => true
                 );
                 $this->session->set_userdata($data);
                 redirect('items');
@@ -43,10 +43,11 @@
         }
 
         public function check_if_email_exists($proposed_email) { // custom callback function
-            if($this->auth_model->check_if_email_exists($proposed_email)) {
-                return TRUE;
-            } else {
-                return FALSE;
-            }
+            return $this->auth_model->check_if_email_exists($proposed_email);
+        }
+
+        public function logout() {
+            $this->session->sess_destroy();
+            $this->index();
         }
     }
