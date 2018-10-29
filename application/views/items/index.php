@@ -15,7 +15,7 @@
     <div class="col-lg-6">
         <a class="btn btn-primary btn-lg" style="float:right" href="<?php echo site_url('/items/create'); ?>" role="button">Lease your item</a>
     </div>
-</div>`
+</div>
 
 <div class="row">
     <?php foreach($items as $item) : ?>

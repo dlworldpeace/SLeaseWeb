@@ -6,7 +6,7 @@
 
         //for owner of the item, to see who have bid for the item
         public function get_bids($item_id) {
-            $query = $this->db->query("SELECT Rate, Email FROM Bids  WHERE Item_id = ".$item_id." 
+            $query = $this->db->query("SELECT Rate, Email FROM Bids WHERE Item_id = ".$item_id." 
                                         ORDER BY Rate DESC;");
             return $query->result_array();
         }

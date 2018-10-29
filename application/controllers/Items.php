@@ -10,7 +10,6 @@
             }
         }
 
-
         /* Items functions. */
         public function index() {
             $current_user = $this->check_login();

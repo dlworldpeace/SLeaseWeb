@@ -22,7 +22,7 @@
                         <a class="nav-link" href="<?php echo base_url(); ?>items">Browse</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Profile</a>
+                        <a class="nav-link" href="<?php echo base_url(); ?>users">Profile</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo base_url(); ?>about">About</a>
