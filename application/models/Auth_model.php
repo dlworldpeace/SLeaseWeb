@@ -21,10 +21,7 @@
                 'password' => $this->input->post('password')
             );
             $sql = "INSERT INTO Users VALUES(?,?,?,0);"; // a new user by default cannot be admin.
-            if($this->db->query($sql, $data)){
-                return true;
-            }
-            return false;
+            return $this->db->query($sql, $data);
         }
 
         public function check_if_email_exists($email) {

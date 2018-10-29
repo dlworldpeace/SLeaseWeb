@@ -36,7 +36,6 @@
             $data['category'] = reset($category)['name'];
             $bid_data['item_id'] = $data['item']['item_id']; 
 
-
             $this->load->view('templates/header');
             $this->load->view('items/detail', $data);
             if($current_user !== $data['item']['owner']) { // load bidding board if this item belongs to someone else.

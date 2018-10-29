@@ -19,23 +19,15 @@
             return $query->result_array();
         }
         
-        public function update_user($email) {
-            $data= array(
-                'item_name' => $this->input->post('item_name'),
-                'description' => $this->input->post('description'),
-                'image' => '', //$imageUri,
-                'pickup_location' => $this->input->post('pickup_location'),                
-                'pickup_region' => $this->input->post('pickup_region'),
-                'category' => (int)$this->input->post('category')
-            );
-            $sql = "UPDATE Items SET 
-                Item_name = ?, 
-                Description = ?, 
-                Image = ?, 
-                Pickup_location = ?, 
-                Pickup_region = ?, 
-                Categories = ?
-                WHERE Item_id= ".$item_id.";";
-            return $this->db->query($sql, $data);
+        public function change_name($email) {
+            $user_name = $this->input->post('displayname');
+            $sql = "UPDATE Users SET User_name='".$user_name."' WHERE Email = '".$email."';";
+            return $this->db->query($sql);
+        }     
+
+        public function change_password($email) {
+            $password = $this->input->post('password');
+            $sql = "UPDATE Users SET Password='".$password."' WHERE Email = '".$email."';";
+            return $this->db->query($sql);
         }
     }

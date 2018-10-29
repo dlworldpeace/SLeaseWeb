@@ -1,4 +1,13 @@
-<h2><?= $title ?></h2>
+<div class="row">
+    <div class="col-lg-6">
+        <h2><?= $title ?></h2>
+    </div>
+    <div class="col-lg-6" style="display:flex;justify-content:flex-end;">
+        <?php echo form_open('/users/edit'); ?>
+            <input type="submit" value="Change Name/Password" class="btn btn-default">
+        </form>
+    </div>
+</div>
 
 <div class="row">
     <div class="col-lg-4">
