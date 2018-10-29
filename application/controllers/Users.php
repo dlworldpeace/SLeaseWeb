@@ -15,10 +15,14 @@
 
             $data['title'] = 'Your Profile: ';
             $data['user'] = $this->user_model->get_user($current_user);
-            $data['ongoing_title'] = 'Your On-going Items: ';
-            $data['ongoing_items'] = $this->user_model->get_ongoing_items($current_user);
-            $data['completed_title'] = 'Your Completed Items: ';
+            $data['sucbid_title'] = 'Successful Bids: ';
+            $data['sucbids'] = $this->user_model->get_sucbids($current_user);
+            $data['ongoingbid_title'] = 'Ongoing Bids: ';
+            $data['ongoingbids'] = $this->user_model->get_ongoingbids($current_user);
+            $data['completed_title'] = 'Completed Leases: ';
             $data['completed_items'] = $this->user_model->get_completed_items($current_user);
+            $data['ongoing_title'] = 'Ongoing Leases: ';
+            $data['ongoing_items'] = $this->user_model->get_ongoing_items($current_user);
             
             $this->load->view('templates/header');
             $this->load->view('users/index', $data);
@@ -29,7 +33,6 @@
             $current_user = $this->check_login();
 
             $data['title'] = 'Edit User Profile';
-
             $data['user'] = $this->user_model->get_user($current_user);
 
             $this->load->view('templates/header');

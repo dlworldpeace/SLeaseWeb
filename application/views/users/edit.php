@@ -4,9 +4,7 @@
     <div class="col-lg-4">
     </div>
     <div class="col-lg-4">
-
         <?php echo validation_errors('<p class="error">'); ?>
-
         <?php echo form_open('users/update_name/'); ?>
             <fieldset>
                 <div class="form-group">
@@ -16,9 +14,7 @@
                 <button type="submit" class="btn btn-primary">Save New Name</button>
             </fieldset>
         </form>
-        
         <hr>
-        
         <?php echo form_open('users/update_password/'); ?>
             <fieldset>
                 <div class="form-group">
@@ -32,9 +28,7 @@
                 <button type="submit" class="btn btn-primary">Save New Password</button>
             </fieldset>
         </form>
-
         <hr>
-
         <a class="btn btn-primary" href="<?php echo site_url('/users/'); ?>" role="button">Cancel</a>
     </div>
     <div class="col-lg-4">

@@ -5,6 +5,7 @@
         <title>Slease</title>
         <link rel="stylesheet" href="https://bootswatch.com/4/minty/bootstrap.min.css">
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/style.css">
+        <script type="text/javascript"src="code.jquery.com/jquery-1.10.2.min.js"></script>
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -28,12 +29,14 @@
                         <a class="nav-link" href="<?php echo base_url(); ?>about">About</a>
                     </li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0" action="<?php echo site_url('/items/search') ?>"  method = "post"> 
+                <form class="form-inline my-2 my-lg-0" action="<?php echo site_url('/items/search') ?>" method="post"> 
                     <input class="form-control mr-sm-2" name="searchBy" id="searchBy" type="text" placeholder="Browse by name">
-                    <button class="btn btn-secondary my-2 my-sm-0"  type="submit">Search</button>
+                    <button class="btn btn-secondary my-2 my-sm-0" style="margin-right:8px" type="submit">Search</button>
                 </form>
-                <a class="btn btn-warning" style="margin-left:10px" href="<?php echo site_url('/auths/logout'); ?>" role="button">Log out</a>
+                <a class="btn btn-warning" href="<?php echo site_url('/auths/logout'); ?>" role="button">Log out</a>
             </div>
         </nav>
+
+        <br>
 
         <div class="container">

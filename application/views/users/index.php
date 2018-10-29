@@ -34,7 +34,83 @@
 
 <div class="row">
     <div class="col-lg-6">
-        <h2><?= $ongoing_title ?></h2>
+        <legend><?= $sucbid_title ?></legend>
+        <?php if(!empty($sucbids)) {
+            echo '<table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Pick Up Date</th>
+                            <th scope="col">Return Date</th>
+                            <th scope="col">Item Name</th>
+                            <th scope="col">Your Bid</th>
+                        </tr>
+                    </thead>
+                    <tbody>';
+            $length = count($sucbids);
+            for ($x = 0; $x < $length; $x++) {
+                echo '<tr class="table-default">
+                        <td>'.$sucbids[$x]['fromdate'].'</td>
+                        <td>'.$sucbids[$x]['todate'].'</td>
+                        <td><a href="'.site_url('/items/'.$sucbids[$x]['item_id']).
+                        '" >'.$sucbids[$x]['item_name'].'</a></td>
+                        <td>S$'.$sucbids[$x]['rate'].'</td>
+                    </tr>';
+            } 
+            echo '</tbody>
+                    </table> ';
+        } else {
+            echo '<strong>You have no winning bids.</strong>';
+        } ?>
+    </div>
+    <div class="col-lg-6">
+        <legend><?= $ongoingbid_title ?></legend>
+        <?php if(!empty($ongoingbids)) {
+            echo '<table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Status</th>
+                            <th scope="col">Decision Date</th>
+                            <th scope="col">Item Name</th>
+                            <th scope="col">Your Bid</th>
+                            <th scope="col">Current Highest</th>
+                        </tr>
+                    </thead>
+                    <tbody>';
+            $length = count($ongoingbids);
+            for ($x = 0; $x < $length; $x++) {
+                if($ongoingbids[$x]['rate'] === $ongoingbids[$x]['maximum']){
+                    echo '<tr class="table-success">
+                            <th scope="row">Highest</th>
+                            <td>'.$ongoingbids[$x]['fromdate'].'</td>
+                            <td><a href="'.site_url('/items/'.$ongoingbids[$x]['item_id']).
+                            '" style="color:#f8f9fa">'.$ongoingbids[$x]['item_name'].'</a></td>
+                            <td>S$'.$ongoingbids[$x]['rate'].'</td>
+                            <td>S$'.$ongoingbids[$x]['maximum'].'</td>
+                        </tr>';
+                } else {
+                    echo '<tr class="table-light">
+                            <th scope="row">Outbidded</th>
+                            <td>'.$ongoingbids[$x]['fromdate'].'</td>
+                            <td><a href="'.site_url('/items/'.$ongoingbids[$x]['item_id']).
+                            '" >'.$ongoingbids[$x]['item_name'].'</a></td>
+                            <td>S$'.$ongoingbids[$x]['rate'].'</td>
+                            <td>S$'.$ongoingbids[$x]['maximum'].'</td>
+                        </tr>';
+                }
+            }
+            echo '</tbody>
+                    </table> ';
+        } else {
+            echo '<strong>You have no on-going bids.</strong>';
+        } ?>
+    </div>
+</div>
+
+<hr>
+
+<div class="row">
+    <div class="col-lg-6">
+        <legend><?= $ongoing_title ?></legend>
     </div>
     <div class="col-lg-6" style="display:flex;justify-content:flex-end;">
         <a class="btn btn-primary btn-lg" href="<?php echo site_url('/items/create'); ?>" role="button">Lease another item</a>
@@ -61,7 +137,7 @@
 
 <hr>
 
-<h2><?= $completed_title ?></h2>
+<legend><?= $completed_title ?></legend>
 
 <div class="row">
     <?php foreach($completed_items as $item) : ?>

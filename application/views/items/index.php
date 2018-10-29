@@ -17,6 +17,8 @@
     </div>
 </div>
 
+<hr>
+
 <div class="row">
     <?php foreach($items as $item) : ?>
         <div class="col-lg-3">
