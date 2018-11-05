@@ -3,12 +3,12 @@
 <div class="row">
     <div class="col-lg-6">
         <div class="form-group">
-            <select class="form-control" name="SorBy" style="width:50%">
-                <option value='All'>Sort By</option>
-                <option value='Fromdate'>Start Date</option>
-                <option value='MinBid'>Mininum Bids</option>
-                <option value='NameAsc'>Name Ascending</option>
-                <option value='NameDsc'>Name Descending</option>
+            <select class="form-control" name="SorBy" style="width:50%" onchange="sort(this.value)">
+                <option value='0'>Sort By</option>
+                <option value='1'>Start Date</option>
+                <option value='2'>Mininum Bids</option>
+                <option value='3'>Name Ascending</option>
+                <option value='4'>Name Descending</option>
             </select>
         </div>
     </div>
@@ -37,4 +37,10 @@
         </div>
     <?php endforeach; ?>
 </div>
+
+ <script type="text/javascript">
+    function sort(index) {
+        window.location.href = "<?php echo site_url('items/index');?>/"+index;
+    }
+</script>
 

@@ -8,6 +8,7 @@ $route['items/control'] = 'items/control';
 $route['items/create'] = 'items/create';
 $route['items/search'] = 'items/search';
 $route['items/bid_for'] = 'items/bid_for';
+$route['items/index'] = 'items/index';
 $route['items/(:any)'] = 'items/detail/$1';
 $route['items'] = 'items/index';
 $route['default_controller'] = 'pages/view';

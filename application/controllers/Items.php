@@ -11,13 +11,40 @@
         }
 
         /* Items functions. */
-        public function index() {
+        public function index($keyword = FALSE) {
             $current_user = $this->check_login();
-
+            
             $data['title'] = 'Items on lease: ';
 
-            $data['items'] = $this->item_model->get_items();
-            
+            if($keyword !== FALSE) {
+                switch($keyword) {
+                    case "0": // No keyword
+                        $data['items'] = $this->item_model->get_items();
+                        break;
+
+                    case "1": // Sort by Start date
+                        $data['items'] = $this->item_model->get_items_orderby_fromdate();
+                        break;
+
+                    case "2": // Sort by Minimum Bids
+                        $data['items'] = $this->item_model->get_items_orderby_minbid();
+                        break;
+                    
+                    case "3": // Sort by Name Ascending
+                        $data['items'] = $this->item_model->get_items_orderby_name_asc();
+                        break;
+                        
+                    case "4": // Sort by Name Descending
+                        $data['items'] = $this->item_model->get_items_orderby_name_desc();
+                        break;
+
+                    default:
+                        break;
+                }
+            } else {
+                $data['items'] = $this->item_model->get_items();
+            }
+
             $this->load->view('templates/header');
             $this->load->view('items/index', $data);
             $this->load->view('templates/footer');

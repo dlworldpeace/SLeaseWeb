@@ -14,6 +14,25 @@
             return $query->result_array();
         }
 
+        public function get_items_orderby_fromdate() {
+            $query = $this->db->query('SELECT * FROM Items ORDER BY Fromdate DESC;');
+            return $query->result_array();
+        }
+
+        public function get_items_orderby_minbid() {
+            $query = $this->db->query('SELECT * FROM Items ORDER BY MinBid;');
+            return $query->result_array();
+        }
+
+        public function get_items_orderby_name_asc() {
+            $query = $this->db->query('SELECT * FROM Items ORDER BY Item_name;');
+            return $query->result_array();
+        }
+        public function get_items_orderby_name_desc() {
+            $query = $this->db->query('SELECT * FROM Items ORDER BY Item_name DESC;');
+            return $query->result_array();
+        }
+
         public function search_items($keyword) {
             $query = $this->db->query("SELECT * FROM Items WHERE Item_name like '%".$keyword."%';");
             return $query->result_array();
