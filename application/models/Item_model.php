@@ -105,4 +105,11 @@
         public function delete_item($item_id) {
             return $this->db->query("DELETE FROM Items WHERE Item_id = '".$item_id."';");
         }
+
+        public function check_if_higher_than_users_minbid($rate) {
+            $item_id = $this->input->post('item_id');
+            $result = $this->db->query("SELECT MinBid FROM Items WHERE Item_id = ".$item_id.";")->result_array();
+            $value = reset($result)['minbid'];
+            return $rate > $value;
+        }
     }

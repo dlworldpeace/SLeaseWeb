@@ -28,4 +28,5 @@ $lang['decimal'] = "The %s field must contain a decimal number.";
 $lang['less_than'] = "The %s field must contain a number less than %s.";
 $lang['greater_than'] = "The %s field must contain a number greater than %s.";
 $lang['check_if_email_exists'] = "Sorry, that username %s is already taken.";
-$lang['check_if_higher_than_current_highest'] = "Sorry, Your new bid of %s is lower than current highest offer. Please try to bid higher.";
+$lang['check_if_higher_than_users_minbid'] = "Sorry, Your new %s is lower than owner's starting bid. Please try to bid higher.";
+$lang['check_if_higher_than_current_highest'] = "Sorry, Your new %s is lower than current highest offer. Please try to bid higher.";

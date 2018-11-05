@@ -58,6 +58,7 @@
             if(empty($data['items'])) {
                 show_404();
             }
+
             $data['item'] = reset($data['items']);
             $category = $this->category_model->get_category($data['item']['categories']);
             $data['category'] = reset($category)['name'];
@@ -209,7 +210,8 @@
             $current_user = $this->check_login();
 
             $this->load->library('form_validation');
-            $this->form_validation->set_rules('rate', 'Rate', 'trim|required|callback_check_if_higher_than_current_highest');
+            $this->form_validation->set_rules('rate', 'bid', 
+                'trim|required|callback_check_if_higher_than_users_minbid|callback_check_if_higher_than_current_highest');
 
             if($this->form_validation->run() === FALSE) { //didn't pass validation
                 $this->detail($item_id);
@@ -223,8 +225,12 @@
                         redirect('items/'.$item_id);
                     }
                 }
-                print_r('Fail to place bid');
+                print_r("Fail to place bid. Your proposed rate could be lower than owner's minimum bid or current highest bid.");
             }
+        }
+
+        public function check_if_higher_than_users_minbid($proposed_rate) { // custom callback function
+            return $this->item_model->check_if_higher_than_users_minbid($proposed_rate);
         }
 
         public function check_if_higher_than_current_highest($proposed_rate) { // custom callback function

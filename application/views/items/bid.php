@@ -3,9 +3,11 @@
                 '<strong>S$'.$bid['rate'].'</strong>'.' for this item</label>';
         } else {
             echo '<strong>You have not placed any bid for this item!</strong>';
-        } 
-        if(!empty($bid)) {
+        }
+        if(!empty($highest)) {
             echo '<br/><label class="col-sm-4 col-form-label">Current highest is <strong>S$'.$highest.'</strong></label>';
+        } else {
+            echo '<br/><label class="col-sm-4 col-form-label">No one has bidded for this item.</label>';
         } ?>
 
 <form class="form-inline my-2 my-lg-0" action="<?php echo site_url('/items/bid_for/'.$item_id) ?>"  method="post"> 
