@@ -36,8 +36,7 @@
         public function validate() {
             $email = $this->input->post('email');
             $password = $this->input->post('password');
-            $result = $this->db->query("SELECT * FROM Users WHERE Email = '".$email."' AND Password = '".$password."';");
-            return $result->num_rows() === 1;
+            return $this->db->query("SELECT isAdmin FROM Users WHERE Email = '".$email."' AND Password = '".$password."';");
         }
 
         public function delete_account($email) {

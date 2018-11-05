@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 $route['users'] = 'users/index';
 $route['auths'] = 'auths/index';
+$route['items/control'] = 'items/control';
 $route['items/create'] = 'items/create';
 $route['items/search'] = 'items/search';
 $route['items/bid_for'] = 'items/bid_for';

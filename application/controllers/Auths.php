@@ -10,13 +10,15 @@
         }
 
         public function validate() {
-            if($this->auth_model->validate()) { // if the user's credential is validated.
+            $result = $this->auth_model->validate();
+            if($result->num_rows() === 1) { // if the user's credential is validated.
+                $user = $result->result();
                 $data = array(
                     'email' => $this->input->post('email'),
-                    //'is_logged_in' => true
+                    'isadmin' => reset($user)->isadmin,
                 );
                 $this->session->set_userdata($data);
-                redirect('items');
+                redirect('items'); // logged in successfully
             } else { // incorrect user email or password
                 print_r("Incorrect user email or password!");
                 $this->index();
