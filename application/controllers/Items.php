@@ -38,17 +38,21 @@
 
             $this->load->view('templates/header');
             $this->load->view('items/detail', $data);
-            if($current_user === $data['item']['owner']) { 
+            if($current_user === $data['item']['owner']) { // load current bidding stats if this item belongs to current user.
                 $bid_data['bids'] = $this->get_bids($item_id);
                 $this->load->view('items/control', $bid_data);
                 $this->load->view('items/stat', $bid_data);
-            } else { // load current bidding stats if this item belongs to current user.
+            } else { 
                 if($this->session->userdata('isadmin')) {
                     $this->load->view('items/control', $bid_data); // admin can edit the item as well
                 }
                 if($data['item']['fromdate'] > date("Y-m-d")) { // load bidding board if this item belongs to someone else and it is still ongoing
                     $bid_data['bid'] = $this->get_current_bid($item_id, $current_user); // pass the current bid data by current user for this item to view
+                    $highest = $this->get_current_highest($item_id);
+                    $bid_data['highest'] = reset($highest);
                     $this->load->view('items/bid', $bid_data);
+                } else {
+                    $this->load->view('items/empty');
                 }
             }
             $this->load->view('templates/footer');
@@ -166,6 +170,11 @@
 
         public function get_current_bid($item_id, $current_user) {
             $result = $this->bid_model->get_current_bid($item_id, $current_user);
+            return reset($result);
+        }
+
+        public function get_current_highest($item_id) {
+            $result = $this->bid_model->get_current_highest($item_id);
             return reset($result);
         }
 

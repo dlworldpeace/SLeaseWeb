@@ -6,7 +6,7 @@
 
         public function get_items($item_id = FALSE) {
             if($item_id === FALSE) {
-                $query = $this->db->query('SELECT * FROM Items;');
+                $query = $this->db->query('SELECT * FROM Items ORDER BY Item_id DESC;');
                 return $query->result_array();
             }
 
