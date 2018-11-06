@@ -11,13 +11,40 @@
         }
 
         /* Items functions. */
-        public function index() {
+        public function index($keyword = FALSE) {
             $current_user = $this->check_login();
-
+            
             $data['title'] = 'Items on lease: ';
 
-            $data['items'] = $this->item_model->get_items();
-            
+            if($keyword !== FALSE) {
+                switch($keyword) {
+                    case "0": // No keyword
+                        $data['items'] = $this->item_model->get_items();
+                        break;
+
+                    case "1": // Sort by Start date
+                        $data['items'] = $this->item_model->get_items_orderby_fromdate();
+                        break;
+
+                    case "2": // Sort by Minimum Bids
+                        $data['items'] = $this->item_model->get_items_orderby_minbid();
+                        break;
+                    
+                    case "3": // Sort by Name Ascending
+                        $data['items'] = $this->item_model->get_items_orderby_name_asc();
+                        break;
+                        
+                    case "4": // Sort by Name Descending
+                        $data['items'] = $this->item_model->get_items_orderby_name_desc();
+                        break;
+
+                    default:
+                        break;
+                }
+            } else {
+                $data['items'] = $this->item_model->get_items();
+            }
+
             $this->load->view('templates/header');
             $this->load->view('items/index', $data);
             $this->load->view('templates/footer');
@@ -31,6 +58,7 @@
             if(empty($data['items'])) {
                 show_404();
             }
+
             $data['item'] = reset($data['items']);
             $category = $this->category_model->get_category($data['item']['categories']);
             $data['category'] = reset($category)['name'];
@@ -38,14 +66,22 @@
 
             $this->load->view('templates/header');
             $this->load->view('items/detail', $data);
-            if($current_user !== $data['item']['owner']) { 
+            if($current_user === $data['item']['owner']) { // load current bidding stats if this item belongs to current user.
+                $bid_data['bids'] = $this->get_bids($item_id);
+                $this->load->view('items/control', $bid_data);
+                $this->load->view('items/stat', $bid_data);
+            } else { 
+                if($this->session->userdata('isadmin')) {
+                    $this->load->view('items/control', $bid_data); // admin can edit the item as well
+                }
                 if($data['item']['fromdate'] > date("Y-m-d")) { // load bidding board if this item belongs to someone else and it is still ongoing
                     $bid_data['bid'] = $this->get_current_bid($item_id, $current_user); // pass the current bid data by current user for this item to view
+                    $highest = $this->get_current_highest($item_id);
+                    $bid_data['highest'] = reset($highest);
                     $this->load->view('items/bid', $bid_data);
+                } else {
+                    $this->load->view('items/empty');
                 }
-            } else { // load current bidding stats if this item belongs to current user.
-                $bid_data['bids'] = $this->get_bids($item_id);
-                $this->load->view('items/stat', $bid_data);
             }
             $this->load->view('templates/footer');
         }
@@ -72,7 +108,6 @@
             $data['categories'] = $this -> category_model -> get_categories();
 
             if($this->form_validation->run() === FALSE) {
-                print_r(1);
                 $this->load->view('templates/header');
                 $this->load->view('items/create', $data);
                 $this->load->view('templates/footer');
@@ -166,11 +201,17 @@
             return reset($result);
         }
 
+        public function get_current_highest($item_id) {
+            $result = $this->bid_model->get_current_highest($item_id);
+            return reset($result);
+        }
+
         public function bid_for($item_id) {
             $current_user = $this->check_login();
 
             $this->load->library('form_validation');
-            $this->form_validation->set_rules('rate', 'Rate', 'trim|required|callback_check_if_higher_than_current_highest');
+            $this->form_validation->set_rules('rate', 'bid', 
+                'trim|required|callback_check_if_higher_than_users_minbid|callback_check_if_higher_than_current_highest');
 
             if($this->form_validation->run() === FALSE) { //didn't pass validation
                 $this->detail($item_id);
@@ -184,8 +225,12 @@
                         redirect('items/'.$item_id);
                     }
                 }
-                print_r('Fail to place bid');
+                print_r("Fail to place bid. Your proposed rate could be lower than owner's minimum bid or current highest bid.");
             }
+        }
+
+        public function check_if_higher_than_users_minbid($proposed_rate) { // custom callback function
+            return $this->item_model->check_if_higher_than_users_minbid($proposed_rate);
         }
 
         public function check_if_higher_than_current_highest($proposed_rate) { // custom callback function

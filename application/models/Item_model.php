@@ -6,11 +6,30 @@
 
         public function get_items($item_id = FALSE) {
             if($item_id === FALSE) {
-                $query = $this->db->query('SELECT * FROM Items;');
+                $query = $this->db->query('SELECT * FROM Items ORDER BY Item_id DESC;');
                 return $query->result_array();
             }
 
             $query = $this->db->query("SELECT * FROM Items WHERE Item_id = '".$item_id."';");
+            return $query->result_array();
+        }
+
+        public function get_items_orderby_fromdate() {
+            $query = $this->db->query('SELECT * FROM Items ORDER BY Fromdate DESC;');
+            return $query->result_array();
+        }
+
+        public function get_items_orderby_minbid() {
+            $query = $this->db->query('SELECT * FROM Items ORDER BY MinBid;');
+            return $query->result_array();
+        }
+
+        public function get_items_orderby_name_asc() {
+            $query = $this->db->query('SELECT * FROM Items ORDER BY Item_name;');
+            return $query->result_array();
+        }
+        public function get_items_orderby_name_desc() {
+            $query = $this->db->query('SELECT * FROM Items ORDER BY Item_name DESC;');
             return $query->result_array();
         }
 
@@ -85,5 +104,12 @@
 
         public function delete_item($item_id) {
             return $this->db->query("DELETE FROM Items WHERE Item_id = '".$item_id."';");
+        }
+
+        public function check_if_higher_than_users_minbid($rate) {
+            $item_id = $this->input->post('item_id');
+            $result = $this->db->query("SELECT MinBid FROM Items WHERE Item_id = ".$item_id.";")->result_array();
+            $value = reset($result)['minbid'];
+            return $rate > $value;
         }
     }

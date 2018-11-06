@@ -11,18 +11,6 @@
             return $query->result_array();
         }
 
-        //my bid item that is successful , need to finalize with the sql
-        public function get_suBids($email) {
-            $query = $this->db->query("");//need to be modify
-            return $query->result_array();
-        }
-
-        //my bid item that is unsuccessful , need to finalize with the sql
-        public function get_unsuBbids($email) {
-            $query = $this->db->query("");//need to be modify
-            return $query->result_array();
-        }
-
         //create bid, follow item_create
         public function create_bid($item_id,$email) {
             $data= array(
@@ -34,9 +22,13 @@
             return $this->db->query($sql, $data);
         }
 
-        //if the user have bid the item
         public function get_current_bid($item_id,$email) {
             $result = $this->db->query("SELECT * FROM bids WHERE Item_id = ".$item_id." AND Email = '".$email."';");
+            return $result->result_array();
+        }
+
+        public function get_current_highest($item_id) {
+            $result = $this->db->query("SELECT MAX(Rate) FROM bids WHERE Item_id = ".$item_id.";");
             return $result->result_array();
         }
 

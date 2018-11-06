@@ -1,0 +1,1 @@
+<strong>This item is closed for bidding.</strong>
