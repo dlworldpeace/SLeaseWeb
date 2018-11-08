@@ -11,15 +11,22 @@
             return $query->result_array();
         }
 
-        //create bid, follow item_create
         public function create_bid($item_id,$email) {
             $data= array(
                 'item_id' => $item_id,
                 'email' => $email,
                 'rate' => $this->input->post('rate')
             );
-            $sql = "INSERT INTO Bids VALUES(?,?,?);";
-            return $this->db->query($sql, $data);
+            //$this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            try {
+                $sql = "INSERT INTO Bids VALUES(?,?,?);";
+                $result = $this->db->query($sql, $data);
+            } catch (PDOException $err) {
+                //print $this->db->_error_message();
+                $ei = $err->errorInfo;
+                die("Function call failed with SQLSTATE " . $ei[0] . ", message " . $ei[2] . "\n");
+            } 
+            return $result;
         }
 
         public function get_current_bid($item_id,$email) {

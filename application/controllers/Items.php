@@ -210,8 +210,7 @@
             $current_user = $this->check_login();
 
             $this->load->library('form_validation');
-            $this->form_validation->set_rules('rate', 'bid', 
-                'trim|required|callback_check_if_higher_than_users_minbid|callback_check_if_higher_than_current_highest');
+            $this->form_validation->set_rules('rate', 'bid', 'trim|required');
 
             if($this->form_validation->run() === FALSE) { //didn't pass validation
                 $this->detail($item_id);
@@ -229,11 +228,11 @@
             }
         }
 
-        public function check_if_higher_than_users_minbid($proposed_rate) { // custom callback function
+        public function check_if_higher_than_users_minbid($proposed_rate) { // custom callback function not in use
             return $this->item_model->check_if_higher_than_users_minbid($proposed_rate);
         }
 
-        public function check_if_higher_than_current_highest($proposed_rate) { // custom callback function
+        public function check_if_higher_than_current_highest($proposed_rate) { // custom callback function not in use
             return $this->bid_model->check_if_higher_than_current_highest($proposed_rate);
         }
         /* Bids functions end. */
