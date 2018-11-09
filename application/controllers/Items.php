@@ -210,30 +210,30 @@
             $current_user = $this->check_login();
 
             $this->load->library('form_validation');
-            $this->form_validation->set_rules('rate', 'bid', 
-                'trim|required|callback_check_if_higher_than_users_minbid|callback_check_if_higher_than_current_highest');
+            $this->form_validation->set_rules('rate', 'bid', 'trim|required');
 
             if($this->form_validation->run() === FALSE) { //didn't pass validation
                 $this->detail($item_id);
             } else {
                 if(empty($this->get_current_bid($item_id, $current_user))) { // insert if there is no previous bid by this user on this item
-                    if($this->bid_model->create_bid($item_id, $current_user)) {
-                        redirect('items/'.$item_id);
+                    if($this->bid_model->create_bid($item_id, $current_user) !== 1) {
+                        echo "<script>alert('Please bid higher than item minbid and current highest bid.');</script>";
                     }
-                } else { // update the rate if there is existing bid by this user on this item
-                    if($this->bid_model->update_bid($item_id, $current_user)) {
-                        redirect('items/'.$item_id);
+                    $this->detail($item_id);
+                } else { // update if there is existing bid by this user on this item
+                    if($this->bid_model->update_bid($item_id, $current_user) !== 1) {
+                        echo "<script>alert('Please bid higher than current highest bid.');</script>";
                     }
+                    $this->detail($item_id);
                 }
-                print_r("Fail to place bid. Your proposed rate could be lower than owner's minimum bid or current highest bid.");
             }
         }
 
-        public function check_if_higher_than_users_minbid($proposed_rate) { // custom callback function
+        public function check_if_higher_than_users_minbid($proposed_rate) { // custom callback function not in use
             return $this->item_model->check_if_higher_than_users_minbid($proposed_rate);
         }
 
-        public function check_if_higher_than_current_highest($proposed_rate) { // custom callback function
+        public function check_if_higher_than_current_highest($proposed_rate) { // custom callback function not in use
             return $this->bid_model->check_if_higher_than_current_highest($proposed_rate);
         }
         /* Bids functions end. */

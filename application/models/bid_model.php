@@ -11,7 +11,6 @@
             return $query->result_array();
         }
 
-        //create bid, follow item_create
         public function create_bid($item_id,$email) {
             $data= array(
                 'item_id' => $item_id,
@@ -19,7 +18,8 @@
                 'rate' => $this->input->post('rate')
             );
             $sql = "INSERT INTO Bids VALUES(?,?,?);";
-            return $this->db->query($sql, $data);
+            $this->db->query($sql, $data);
+            return $this->db->affected_rows();
         }
 
         public function get_current_bid($item_id,$email) {
@@ -34,7 +34,8 @@
 
         public function update_bid($item_id, $email) {
             $rate = $this->input->post('rate');
-            return $this->db->query("UPDATE Bids SET Rate='".$rate."' WHERE Item_id = ".$item_id." AND Email = '".$email."';");
+            $this->db->query("UPDATE Bids SET Rate='".$rate."' WHERE Item_id = ".$item_id." AND Email = '".$email."';");
+            return $this->db->affected_rows();
         }
 
         public function check_if_higher_than_current_highest($rate) {
