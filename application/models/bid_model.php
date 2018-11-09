@@ -17,16 +17,9 @@
                 'email' => $email,
                 'rate' => $this->input->post('rate')
             );
-            //$this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            try {
-                $sql = "INSERT INTO Bids VALUES(?,?,?);";
-                $result = $this->db->query($sql, $data);
-            } catch (PDOException $err) {
-                //print $this->db->_error_message();
-                $ei = $err->errorInfo;
-                die("Function call failed with SQLSTATE " . $ei[0] . ", message " . $ei[2] . "\n");
-            } 
-            return $result;
+            $sql = "INSERT INTO Bids VALUES(?,?,?);";
+            $this->db->query($sql, $data);
+            return $this->db->affected_rows();
         }
 
         public function get_current_bid($item_id,$email) {
@@ -41,7 +34,8 @@
 
         public function update_bid($item_id, $email) {
             $rate = $this->input->post('rate');
-            return $this->db->query("UPDATE Bids SET Rate='".$rate."' WHERE Item_id = ".$item_id." AND Email = '".$email."';");
+            $this->db->query("UPDATE Bids SET Rate='".$rate."' WHERE Item_id = ".$item_id." AND Email = '".$email."';");
+            return $this->db->affected_rows();
         }
 
         public function check_if_higher_than_current_highest($rate) {
